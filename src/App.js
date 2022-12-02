@@ -1,23 +1,56 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [num1, setNum1] = useState(0);
+  let decement = () => {
+    setNum1((preNum) => preNum - 1);
+  };
+  let Increment = () => {
+    setNum1((preNum) => preNum + 1);
+  };
+  let reset = () => {
+    setNum1((preNum) => (preNum = 0));
+  };
+
+  useEffect(() => {
+    console.log(num1);
+    if (num1 > 0) {
+      document.body.style.backgroundColor = "red";
+    } else if (num1 == 0) {
+      document.body.style.backgroundColor = "blue";
+    } else {
+      document.body.style.backgroundColor = "green";
+    }
+  }, [num1]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <p>{num1}</p>
+      <div className="button">
+        <button
+          onClick={() => {
+            setNum1(num1 - 1);
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Derement
+        </button>
+        <button
+          onClick={() => {
+            setNum1(0);
+          }}
+        >
+          Reset
+        </button>
+        <button
+          onClick={() => {
+            setNum1(num1 + 1);
+          }}
+        >
+          Increment
+        </button>
+      </div>
     </div>
   );
 }
